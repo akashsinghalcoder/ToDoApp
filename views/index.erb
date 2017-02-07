@@ -1,0 +1,94 @@
+<style>
+
+body
+{
+	background-color:  #5dade2 
+}
+.strikethrough
+{
+	text-decoration:line-through;
+
+}
+.UrgentImportant
+{
+	color: red;
+}
+section
+{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	
+}
+div
+{
+	flex:1 300px;
+	
+}
+
+</style>
+<body>
+<h1><%= "Welcome bro #{yo.email}" %></h1>
+<a href="/logout" style="float:right"> Logout </a>
+<h3>Welcome to do app</h3>
+<form action="/addtask" method="POST">
+<input type="text" name="newtask">
+<button type"submit">Add task</button>
+</form>
+<form action="/changepassword" style="position:absolute; bottom:90%; left:50%">
+<button>Change Password</button>
+</form>
+
+<% if tasks %>
+<section>
+<% tasks.each  do |task| %>
+<div
+<% if task.done %> 
+	class="strikethrough"
+<% end %>
+<% if task.imp&&task.urg  %>
+class="UrgentImportant"
+<% end %>
+><%= task.content %>
+<form action="/removetask" method="POST">
+<input type="hidden" name="removetask" value="<%= task.id %>">
+<button type="submit">Remove Task</button>
+</form>
+<form action="/completed" method="POST">
+<input type="hidden" name="completed" value="<%= task.id %>">
+<button type="submit">Toggle</button>
+</form>
+<form action="/important" method="POST">
+<input type="hidden" name="important" value="<%= task.id %>">
+<button type="submit">
+<% if task.imp==true %>
+<%= "IMP" %>
+<% else %>
+<%= "Not Imp" %>
+	<% end %>
+</button>
+</form>
+<form action="/urgent" method="POST">
+<input type="hidden" name="urgent" value="<%= task.id %>">
+<button type="submit">
+<% if task.urg==true %>
+<%= "Urgent" %>
+<% else %>
+<%= "Not Urgent" %>
+	<% end %>
+</button>
+</form>
+<form action="/details" method="POST">
+<input type="hidden" name="details" value="<%= task.id %>">
+<button type="submit">Details</button>
+<% if task.detailsshown %>
+<textarea name="yo"><%= task.details %></textarea>
+<% end %>
+</form>
+</div>
+<% end %>
+</section>
+<% end %>
+</body>
+
+

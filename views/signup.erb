@@ -1,0 +1,23 @@
+<body>
+<h1>Welcome</h1>
+<h3>Register Here to experience something awesome</h3>
+<form action="/register" method="POST">
+	<input type="text" name="email" placeholder="email">
+	<input type="password" name="password" placeholder="password">
+	<button type="submit">Register</button>
+	<% if t==1 %>
+	<%= "This email id already exists" %>
+	<% end %>
+	<% if t==2 %>
+	<h5><%= "Thanks for signing up with us, move onto login page now" %></h5>
+	<a href="/login"> Move Back to Login Page</a>
+	<% end %>
+</form>
+</body>
+<style >
+body
+{
+background-color:#f7dc6f 
+
+}
+</style
